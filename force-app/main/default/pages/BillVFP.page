@@ -13,7 +13,7 @@
         we can access fields on the Parent object by utilizing the relationship
         between the Bill__c and Account object, Account__r, as seen below:
     -->
-    You are looking at the Most Recent Bill for {!Bill__c.Account__r.Name}.
+    You are looking at the Most Recent Bill for {!Bill__c.Account__r.Name}.<br/>
     <!--
         The general format of fields on the Parent object will be:
         ChildObject__c.ParentObject__r.FieldName__c
@@ -21,19 +21,60 @@
         The general format of fields on the Child object will be:
         ChildObject__c.FieldName__c
     -->
-
-    <!--
+        <!--
         Display information from the account here in an organized fasion,
         such as  phone number, email address, billing address, and shipping address.
 
         Hint: use apex:panelGrid and apex:PanelGroup to display this nicely.
     -->
-
+       <apex:panelGrid columns="2" cellpadding="5" width="75%" >
+           <apex:panelGroup >
+               <h1 style="font-size:18px;">Email</h1>
+               <apex:outputText Value="{!Bill__c.Account__r.Email__c}" ></apex:outputText>
+           </apex:panelGroup>
+           <apex:panelGroup >
+              <h1 style="font-size:18px;">Phone</h1> 
+                <apex:outputText Value="{!Bill__c.Account__r.Phone}" ></apex:outputText>
+           </apex:panelGroup>
+          
+           <apex:panelGroup >
+               <h1 style="font-size:18px;">Billing Address</h1>  
+               <apex:outputText Value="{!Bill__c.Account__r.BillingStreet}" ></apex:outputText> <br/>
+               <apex:outputText Value="{!Bill__c.Account__r.BillingState}," ></apex:outputText> &nbsp;
+               <apex:outputText Value="{!Bill__c.Account__r.BillingCountry}" ></apex:outputText> <br/>
+               <apex:outputText Value="{!Bill__c.Account__r.BillingPostalCode}" ></apex:outputText> 
+           </apex:panelGroup>
+           <apex:panelGroup >
+               <h1 style="font-size:18px;">Shipping Address</h1>  
+               <apex:outputText Value="{!Bill__c.Account__r.ShippingStreet}" ></apex:outputText> <br/>
+                <apex:outputText Value="{!Bill__c.Account__r.ShippingState}," ></apex:outputText> &nbsp;
+               <apex:outputText Value="{!Bill__c.Account__r.ShippingCountry}" ></apex:outputText> <br/>
+               <apex:outputText Value="{!Bill__c.Account__r.ShippingPostalCode}" ></apex:outputText> 
+           </apex:panelGroup>
+             
+      </apex:panelGrid>
 
     <!--
         Build a table showing the Bill Summary (Bill Name, Bill Balance, and Bill Id) here.
         Hint: use apex:pageBlockTable to display this in a table.
     -->
-
+    <apex:panelGrid columns="1" cellpadding="5" width="100%"><br/>
+        <strong>Bill Summary</strong><br/>
+         
+        <table style="border:1px solid black;border-collapse:collapse;width:100%;">
+            <tr>
+                <th style="width:25%;">Name</th>
+                <th style="width:25%;">Balance</th>
+                <th style="width:50%;">Bill Id</th>
+            </tr>
+            <tr>
+                <td style="border:1px solid black;width:25%;"> {!Bill__c.Name}</td>
+                <td style="border:1px solid black;width:25%;">${!Bill__c.Balance__c}</td>
+                <td style="border:1px solid black;width:50%;">{!Bill__c.Bill_Id__c}</td>
+            </tr>
+            
+       </table>
+    </apex:panelGrid>
     
+     
 </apex:page>
